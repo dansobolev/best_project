@@ -42,10 +42,13 @@ def add():
 
 
     writer(lst)
+
     #label_list_of_tasks.config(text=lst)
     #label_list_of_tasks.config(text=[{"sdf":123, "23":432}])
 
 def show_list():
+    listbox_delete.grid_remove()
+    text_list_of_tasks.grid()
     for todo in lst:
         text_list_of_tasks.configure(state=NORMAL)
         text_list_of_tasks.insert(1.0, "Задача: " + todo['task'] + " " + "Категория: " + todo['category'] + " " + "Дата: " +todo['time'] + '\n')
@@ -56,6 +59,15 @@ def show_list():
     """text_list_of_tasks.configure(state=NORMAL)
     text_list_of_tasks.insert(1.0, lst)
     text_list_of_tasks.configure(state=DISABLED)"""
+
+
+def delete_task():
+    global listbox_delete
+    text_list_of_tasks.grid_remove()
+    listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50)
+    listbox_delete.grid(row=0, column=0, padx=1, pady=1)
+    for todo in lst:
+        listbox_delete.insert(END, "Задача: " + todo['task'] + " " + "Категория: " + todo['category'] + " " + "Дата: " +todo['time'] + '\n')
 
 
 def writer(something):
@@ -134,11 +146,20 @@ entry_time.grid(row=2, column=1)
 button_add = Button(frame1, text="Добавить", width=10, command=add)
 button_add.grid(row=4,column=1, pady=1)
 
+button_delete = Button(frame1, text="Удалить задачу", command=delete_task)
+button_delete.grid(row=5, column=1)
+
 button_list_of_tasks = Button(frame1, text="Список задач", width=13, command=show_list)
-button_list_of_tasks.grid(row=5,column=1, pady=1)
+button_list_of_tasks.grid(row=6,column=1, pady=1)
 
 button_exit = Button(frame1, text="Выход", width=8, command=exit)
-button_exit.grid(row=6,column=1, pady=1)
+button_exit.grid(row=7,column=1, pady=1)
+
+
+
+
+#Listbox для удаления заметок
+
 
 
 
@@ -147,7 +168,7 @@ button_exit.grid(row=6,column=1, pady=1)
 first_open_tasks()
 
 
-root.resizable(width=False, height=False) # запрещает юзеру изменять размер окна
+root.resizable(width=False, height=False)# запрещает юзеру изменять размер окна
 
 root.mainloop()
 
