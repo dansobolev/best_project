@@ -32,6 +32,7 @@ def exit():
 
 lst = []
 
+
 def add():
     dictionary = {}
     dictionary["task"] = entry_task.get()
@@ -46,13 +47,28 @@ def add():
     #label_list_of_tasks.config(text=lst)
     #label_list_of_tasks.config(text=[{"sdf":123, "23":432}])
 
+
+
 def show_list():
-    listbox_delete.grid_remove()
-    text_list_of_tasks.grid()
-    for todo in lst:
-        text_list_of_tasks.configure(state=NORMAL)
-        text_list_of_tasks.insert(1.0, "Задача: " + todo['task'] + " " + "Категория: " + todo['category'] + " " + "Дата: " +todo['time'] + '\n')
-        text_list_of_tasks.configure(state=DISABLED)
+
+    try:
+        button_delete_frame2.grid_remove()
+        listbox_delete.grid_remove()
+        text_list_of_tasks.grid()
+        for todo in lst:
+            text_list_of_tasks.configure(state=NORMAL)
+            text_list_of_tasks.insert(1.0, "Задача: " + todo['task'] + " " + "Категория: " + todo[
+                'category'] + " " + "Дата: " + todo['time'] + '\n')
+            text_list_of_tasks.configure(state=DISABLED)
+    except:
+        for todo in lst:
+            text_list_of_tasks.configure(state=NORMAL)
+            text_list_of_tasks.insert(1.0, "Задача: " + todo['task'] + " " + "Категория: " + todo[
+                'category'] + " " + "Дата: " + todo['time'] + '\n')
+            text_list_of_tasks.configure(state=DISABLED)
+
+
+
 
     # сначала присваивает значениу NORMAL атрибуту state для возможности добавления текста
     # после добавления текста изменяет значение на DISABLED для запрещения изменения
@@ -60,14 +76,25 @@ def show_list():
     text_list_of_tasks.insert(1.0, lst)
     text_list_of_tasks.configure(state=DISABLED)"""
 
+def delete():
+    for i in reversed(listbox_delete.curselection()):
+        listbox_delete.delete(i)
+
 
 def delete_task():
+    global button_delete_frame2
+    button_delete_frame2 = Button(frame2, text='Delete', command=delete)
+    button_delete_frame2.grid()
     global listbox_delete
+
     text_list_of_tasks.grid_remove()
     listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50)
     listbox_delete.grid(row=0, column=0, padx=1, pady=1)
     for todo in lst:
-        listbox_delete.insert(END, "Задача: " + todo['task'] + " " + "Категория: " + todo['category'] + " " + "Дата: " +todo['time'] + '\n')
+        listbox_delete.insert(END, "Задача: " + todo['task'] + " " + "Категория: " + todo['category'] + " " + "Дата: " +
+                              todo['time'] + '\n')
+
+
 
 
 def writer(something):
@@ -90,6 +117,9 @@ def first_open_tasks():
     except Exception as ex:
         print(ex)
 
+
+def filter_tasks():
+    pass
 
 
 root = Tk()
@@ -149,23 +179,20 @@ button_add.grid(row=4,column=1, pady=1)
 button_delete = Button(frame1, text="Удалить задачу", command=delete_task)
 button_delete.grid(row=5, column=1)
 
+button_filter = Button(frame1, text="Фильтр задач", command=filter_tasks)
+button_filter.grid(row=6, column=1)
+
 button_list_of_tasks = Button(frame1, text="Список задач", width=13, command=show_list)
-button_list_of_tasks.grid(row=6,column=1, pady=1)
+button_list_of_tasks.grid(row=7,column=1, pady=1)
 
 button_exit = Button(frame1, text="Выход", width=8, command=exit)
-button_exit.grid(row=7,column=1, pady=1)
-
-
-
-
-#Listbox для удаления заметок
-
-
-
-
+button_exit.grid(row=8,column=1, pady=1)
 
 
 first_open_tasks()
+
+
+# добавить функцию для фильтра по году или по алфавиту
 
 
 root.resizable(width=False, height=False)# запрещает юзеру изменять размер окна
