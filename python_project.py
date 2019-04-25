@@ -125,14 +125,19 @@ def filter_tasks():
 root = Tk()
 root.title("Менеджер задач")
 
-frame1 = Frame(root, width=320, height=230, background="#D3D3D3")
-frame2 = Frame(root, width=320, height=230, background="#D3D3D3")
+frame1 = Frame(root, width=320, height=70, background="#D3D3D3") #default color was #D3D3D3
+frame2 = Frame(root, width=320, height=230, background="#D3D3D3") #default color was #D3D3D3
+
+#ФРЕЙМ ДЛЯ НОРМАЛЬНОГО РАСПОЛОЖЕНИЯ КНОПОК
+frame3 = Frame(root, width=320, height=160, background='#D3D3D3')
 
 frame1.grid(row=0, column=0)
-frame2.grid(row=0, column=1)
+frame2.grid(row=0, column=1, rowspan=2)
+frame3.grid(row=1, column=0)
 
 frame1.grid_propagate(0)
 frame2.grid_propagate(0)
+frame3.grid_propagate(0)
 
 # label1 = Label(frame1, background='purple', text='coooool').grid()
 # label2 = Label(frame2, background='purple', text='coooool').grid()
@@ -173,20 +178,25 @@ entry_time = Entry(frame1, width=40)
 entry_time.grid(row=2, column=1)
 
 
-button_add = Button(frame1, text="Добавить", width=10, command=add)
-button_add.grid(row=4,column=1, pady=1)
+button_add = Button(frame3, text="Добавить", width=10, command=add)
+#button_add.grid(row=4,column=1, pady=1)
+button_add.place(x=50, y=10)
 
-button_delete = Button(frame1, text="Удалить задачу", command=delete_task)
-button_delete.grid(row=5, column=1)
+button_delete = Button(frame3, text="Удалить задачу", command=delete_task)
+#button_delete.grid(row=5, column=1)
+button_delete.place(x=45, y=40)
 
-button_filter = Button(frame1, text="Фильтр задач", command=filter_tasks)
-button_filter.grid(row=6, column=1)
+button_filter = Button(frame3, text="Фильтр задач", command=filter_tasks)
+#button_filter.grid(row=6, column=1)
+button_filter.place(x=188, y=40)
 
-button_list_of_tasks = Button(frame1, text="Список задач", width=13, command=show_list)
-button_list_of_tasks.grid(row=7,column=1, pady=1)
+button_list_of_tasks = Button(frame3, text="Список задач", width=13, command=show_list)
+#button_list_of_tasks.grid(row=7,column=1, pady=1)
+button_list_of_tasks.place(x=180, y=10)
 
-button_exit = Button(frame1, text="Выход", width=8, command=exit)
-button_exit.grid(row=8,column=1, pady=1)
+button_exit = Button(frame3, text="Выход", width=8, command=exit)
+#button_exit.grid(row=8,column=1, pady=1)
+button_exit.place(x=130, y=100)
 
 
 first_open_tasks()
