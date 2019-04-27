@@ -73,7 +73,7 @@ def delete():
 
 def delete_task():
     global button_delete_frame2
-    button_delete_frame2 = Button(frame2, text='Delete', command=delete)
+    
     button_delete_frame2.grid()
 
     global listbox_delete
@@ -186,6 +186,9 @@ button_exit = Button(frame3, text="Выход", width=13, command=exit,  bg='#47
                      activebackground='#610303', relief='raised')
 #button_exit.grid(row=8,column=1, pady=1)
 button_exit.place(x=180, y=55)
+
+button_delete_frame2 = Button(frame2, text='Delete', command=delete)
+button_delete_frame2.grid_remove()
 
 
 first_open_tasks()
