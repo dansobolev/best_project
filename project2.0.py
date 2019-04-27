@@ -67,7 +67,6 @@ def show_list():
 def delete():
     for i in reversed(listbox_delete.curselection()):
         listbox_delete.delete(i)
-        lst.remove(lst[i])
         text_list_of_tasks.configure(state=NORMAL)
         text_list_of_tasks.delete(1.0, END)
         text_list_of_tasks.configure(state=DISABLED)
