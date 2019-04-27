@@ -18,13 +18,13 @@ def add():
     elif entry_task.get() != '' and entry_category.get() == '' and entry_time.get() != '':
         mb.showerror("Ошибка", "Вы не ввели категорию")
     elif entry_task.get() != '' and entry_category.get() != '' and entry_time.get() == '':
-        mb.showerror("Ошибка", "Вы не ввели дату")
+        mb.showerror("Ошибка", "Вы не ввели время")
     elif entry_task.get() == '' and entry_category.get() == '' and entry_time.get() != '':
         mb.showerror("Ошибка", "Вы не ввели задачу и категорию")
     elif entry_task.get() != '' and entry_category.get() == '' and entry_time.get() == '':
-        mb.showerror("Ошибка", "Вы не ввели категорию и дату")
+        mb.showerror("Ошибка", "Вы не ввели категорию и время")
     elif entry_task.get() == '' and entry_category.get() != '' and entry_time.get() == '':
-        mb.showerror("Ошибка", "Вы не ввели задачу и дату")
+        mb.showerror("Ошибка", "Вы не ввели задачу и время")
     else:
         mb.showerror("Ошибка", "Вы ничего не ввели")
 
