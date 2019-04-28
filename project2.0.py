@@ -33,7 +33,8 @@ def add():
     #label_list_of_tasks.config(text=[{"sdf":123, "23":432}])
 
 def show_list():
-
+    text_list_of_tasks.configure(state=NORMAL)
+    text_list_of_tasks.delete(1.0, END)
     try:
         button_delete_frame2.grid_remove()
         listbox_delete.grid_remove()
