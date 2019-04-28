@@ -78,7 +78,6 @@ def delete_task():
 
     global listbox_delete
     text_list_of_tasks.grid_remove()
-    listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50)
     listbox_delete.grid(row=0, column=0, padx=1, pady=1)
 
     for todo in lst:
@@ -190,6 +189,9 @@ button_exit.place(x=180, y=55)
 button_delete_frame2 = Button(frame2, text='Delete', command=delete)
 button_delete_frame2.grid_remove()
 
+
+listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50)
+listbox_delete.grid_remove()
 
 first_open_tasks()
 
