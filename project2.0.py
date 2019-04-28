@@ -12,7 +12,6 @@ def add():
         dictionary['time'] = entry_time.get()
         lst.append(dictionary)
         writer(lst)
-        lst.clear()
     elif entry_task.get() == '' and entry_category.get() != '' and entry_time.get() != '':
         mb.showerror("Ошибка", "Вы не ввели задачу")
     elif entry_task.get() != '' and entry_category.get() == '' and entry_time.get() != '':
