@@ -33,19 +33,19 @@ def add():
     #label_list_of_tasks.config(text=[{"sdf":123, "23":432}])
 
 def show_list():
-    text_list_of_tasks.configure(state=NORMAL)
-    text_list_of_tasks.delete(1.0, END)
+
     try:
         button_delete_frame2.grid_remove()
         listbox_delete.grid_remove()
         text_list_of_tasks.grid()
         with open('todo_list.json', 'r', encoding='cp1251') as json_file:
             contents = json.load(json_file)
-        for todo in contents:
+        for todo in content:
             text_list_of_tasks.configure(state=NORMAL)
             text_list_of_tasks.insert(1.0, "Задача: " + todo['task'] + " " + "Категория: " + todo[
                 'category'] + " " + "Дата: " + todo['time'] + '\n')
             text_list_of_tasks.configure(state=DISABLED)
+           
     except:
         with open('todo_list.json', 'r', encoding='cp1251') as json_file:
             contents = json.load(json_file)
@@ -70,7 +70,7 @@ def delete():
         text_list_of_tasks.configure(state=NORMAL)
         text_list_of_tasks.delete(1.0, END)
         text_list_of_tasks.configure(state=DISABLED)
-
+        
 def delete_task():
     global button_delete_frame2
     
@@ -78,9 +78,11 @@ def delete_task():
 
     global listbox_delete
     text_list_of_tasks.grid_remove()
+    listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50)
     listbox_delete.grid(row=0, column=0, padx=1, pady=1)
-
-    for todo in lst:
+    with open('todo_list.json', 'r', encoding='cp1251') as json_file:
+            contents = json.load(json_file)
+    for todo in contents:
         listbox_delete.insert(END, "Задача: " + todo['task'] + " " + "Категория: " + todo['category'] + " " + "Дата: " +
                               todo['time'] + '\n')
 
@@ -189,9 +191,6 @@ button_exit.place(x=180, y=55)
 button_delete_frame2 = Button(frame2, text='Delete', command=delete)
 button_delete_frame2.grid_remove()
 
-
-listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50)
-listbox_delete.grid_remove()
 
 first_open_tasks()
 
