@@ -86,6 +86,7 @@ def ready_to_delete():
         json.dump(contents, file_output_json)
     lst_delete = []
 
+    show_list()
 
 def delete_task():
     global listbox_delete
@@ -153,20 +154,11 @@ frame1.grid_propagate(0)
 frame2.grid_propagate(0)
 frame3.grid_propagate(0)
 
-# label1 = Label(frame1, background='purple', text='coooool').grid()
-# label2 = Label(frame2, background='purple', text='coooool').grid()
 
-# фрейм вывода списка задач:
-# ширина одного фрейма = 160
-# высота равна 115
-
-text_list_of_tasks = Text(frame2, width=37, height=13)
+text_list_of_tasks = Text(frame2, width=38, height=13)
 text_list_of_tasks.grid(row=0, column=0, padx=1, pady=1)
 text_list_of_tasks.configure(state=DISABLED)
 
-"""#тестовый label для правого фрейма для вывода списка задач:
-label_list_of_tasks = Label(frame2, width=37, height=13, background='white')
-label_list_of_tasks.grid(row=0, column=0, padx=1, pady=2)"""
 
 # левый фрейм:
 
@@ -215,7 +207,7 @@ button_delete_frame2.grid_remove()
 button_ready_to_remove = Button(frame2, text='Готово', width=13,activebackground='#BFB173',bg='#474747',fg='white',command=ready_to_delete)
 button_ready_to_remove.grid_remove()
 
-listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50, highlightcolor='white', bg='#E0E0E0',
+listbox_delete = Listbox(frame2, selectmode=SINGLE, width=51,highlightcolor='white', bg='white',
                          selectbackground='#2F2F2F')
 listbox_delete.grid(row=0, column=0)
 listbox_delete.grid_remove()
