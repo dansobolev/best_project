@@ -5,6 +5,7 @@ from tkinter import messagebox as mb
 lst = []
 lst_delete = []
 
+
 def add():
     dictionary = {}
     if entry_task.get() != '' and entry_category.get() != '' and entry_time.get() != '':
@@ -51,7 +52,8 @@ def show_list():
         for todo in contents:
             text_list_of_tasks.configure(state=NORMAL)
             text_list_of_tasks.insert(1.0, "Задача: " + str(todo['task']) + " " + "Категория: " + str(todo[
-                'category']) + " " + "Дата: " + str(todo['time']) + '\n')
+                                                                                                          'category']) + " " + "Дата: " + str(
+                todo['time']) + '\n')
             text_list_of_tasks.configure(state=DISABLED)
 
     # сначала присваивает значениe NORMAL атрибуту state для возможности добавления текста
@@ -65,11 +67,13 @@ def show_list():
 def delete():
     for i in reversed(listbox_delete.curselection()):
         listbox_delete.delete(i)
-        #text_list_of_tasks.configure(state=NORMAL)
-        #text_list_of_tasks.delete(1.0, END)
-        #text_list_of_tasks.configure(state=DISABLED)
+        # text_list_of_tasks.configure(state=NORMAL)
+        # text_list_of_tasks.delete(1.0, END)
+        # text_list_of_tasks.configure(state=DISABLED)
         lst_delete.append(i)
     print(lst_delete)
+
+
 def ready_to_delete():
     global lst_delete
 
@@ -77,11 +81,10 @@ def ready_to_delete():
         contents = json.load(json_file)
     for i in sorted(lst_delete, reverse=True):
         contents.pop(i)
-        
+
     with open('todo_list.json', 'w') as file_output_json:
         json.dump(contents, file_output_json)
     lst_delete = []
-
 
 
 def delete_task():
@@ -99,13 +102,11 @@ def delete_task():
                               todo['time'] + '\n')
 
 
-
 def writer(something):
     with open('todo_list.json', 'r', encoding='cp1251') as json_file:
         contents = json.load(json_file)
     for i in something:
         contents.append(i)
-
 
     try:
         with open('todo_list.json', 'w', encoding='windows-1251') as file_write:
@@ -128,7 +129,11 @@ def first_open_tasks():
 
 
 def exit():
-    root.destroy()
+    answer=mb.askyesno(title='Внимание!',message='Вы точно хотите выйти из программы?')
+    if answer == True:
+        root.destroy()
+    else:
+        pass
 
 
 root = Tk()
@@ -203,14 +208,16 @@ button_exit = Button(frame3, text="Выход", width=13, command=exit, bg='#474
 # button_exit.grid(row=8,column=1, pady=1)
 button_exit.place(x=180, y=55)
 
-button_delete_frame2 = Button(frame2, text='Delete', bg='#474747', fg='white', command=delete)
+button_delete_frame2 = Button(frame2, text='Удалить',width=13, bg='#474747', fg='white', command=delete)
+button_delete_frame2.grid(pady=1)
 button_delete_frame2.grid_remove()
 
-button_ready_to_remove = Button(frame2, text='Ready', command=ready_to_delete)
+button_ready_to_remove = Button(frame2, text='Готово', width=13,activebackground='#BFB173',bg='#474747',fg='white',command=ready_to_delete)
 button_ready_to_remove.grid_remove()
 
 listbox_delete = Listbox(frame2, selectmode=SINGLE, width=50, highlightcolor='white', bg='#E0E0E0',
-                             selectbackground='#2F2F2F')
+                         selectbackground='#2F2F2F')
+listbox_delete.grid(row=0, column=0)
 listbox_delete.grid_remove()
 
 first_open_tasks()
