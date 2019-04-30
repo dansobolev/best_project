@@ -28,9 +28,6 @@ def add():
     else:
         mb.showerror("Ошибка", "Вы ничего не ввели")
 
-    # label_list_of_tasks.config(text=lst)
-    # label_list_of_tasks.config(text=[{"sdf":123, "23":432}])
-
 
 def show_list():
     text_list_of_tasks.configure(state=NORMAL)
@@ -104,9 +101,15 @@ def delete_task():
 
 
 def writer(something):
+    with open('todo_list.json', 'r', encoding='cp1251') as json_file:
+        contents = json.load(json_file)
+    for i in something:
+        contents.append(i)
+
+
     try:
         with open('todo_list.json', 'w', encoding='windows-1251') as file_write:
-            json.dump(something, file_write, sort_keys=False, ensure_ascii=False)
+            json.dump(contents, file_write, sort_keys=False, ensure_ascii=False)
     except Exception as e:
         print(e)
 
